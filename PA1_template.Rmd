@@ -36,7 +36,7 @@ NOTE: Pls see note above at the top on decision not to remove 0 steps from the c
 meansteps <- mean(sumdata$TotalSteps,na.rm=TRUE)
 mediansteps <-median(sumdata$TotalSteps,na.rm=TRUE)
 ```
-The mean total number of steps taken per day is **`r meansteps`**  
+The mean total number of steps taken per day is `r meansteps`  
 The median total number of steps taken per day is **`r mediansteps`**
 
 
