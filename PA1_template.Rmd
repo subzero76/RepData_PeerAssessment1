@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo=TRUE)
 
 ```{r,echo=TRUE}
 library(data.table)
-#setwd("./repdata-data-activity")
+setwd("./repdata-data-activity")
 data <- read.csv("activity.csv",head=TRUE,sep=",")
 data$date <- as.Date(as.character(data$date, "%Y-%m-%d"))
 data <- data.table(data)
@@ -36,7 +36,7 @@ NOTE: Pls see note above at the top on decision not to remove 0 steps from the c
 meansteps <- mean(sumdata$TotalSteps,na.rm=TRUE)
 mediansteps <-median(sumdata$TotalSteps,na.rm=TRUE)
 ```
-The mean total number of steps taken per day is `r meansteps`  
+The mean total number of steps taken per day is **`r meansteps`**  
 The median total number of steps taken per day is **`r mediansteps`**
 
 
@@ -102,3 +102,4 @@ library(lattice)
 xyplot(AvgSteps ~interval | date, typ="l" , ylab="Number of Steps", data = avgdata, layout = c(1, 2))
 
 ```
+There is more activity (especially between the 750 and 1000 intervals) on weekdays as that peeked at above 200 steps.  Compared this to the weekend activity pattern where none of the intervals go beyond 200 steps.
