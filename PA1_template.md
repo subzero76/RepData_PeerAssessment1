@@ -1,8 +1,9 @@
 ---
-title: "Reproducible Research: Peer Assessment 1"
-output: 
+title: 'Reproducible Research: Peer Assessment 1'
+output:
   html_document:
-    keep_md: true
+    keep_md: yes
+  pdf_document: default
 ---
 
 
@@ -14,21 +15,7 @@ knitr::opts_chunk$set(echo=TRUE)
 
 ```r
 library(data.table)
-```
-
-```
-## data.table 1.9.2  For help type: help("data.table")
-```
-
-```r
-setwd("./repdata-data-activity")
-```
-
-```
-## Error: cannot change working directory
-```
-
-```r
+#setwd("./repdata-data-activity")
 data <- read.csv("activity.csv",head=TRUE,sep=",")
 data$date <- as.Date(as.character(data$date, "%Y-%m-%d"))
 data <- data.table(data)
@@ -72,8 +59,8 @@ with(avgstepsint,plot(interval,AvgSteps,typ="l",xlab ="5-min Interval", ylab="Av
 maxstepsint<-avgstepsint[avgstepsint$AvgSteps == max(avgstepsint$AvgSteps),][[1]]
 ```
 Interval **835**, on average across all days, contains the maximum number of steps.  
-
-##Imputing missing values  
+  
+## Imputing missing values  
 1.  Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)
 
 ```r
@@ -83,7 +70,7 @@ totalNArows <- nrow(NArows)
 
 The total number of missing values in the dataset is **2304**
 
-2.  Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.  
+2. Fill all the missing values in the dataset with the mean for that 5-minute interval
 3.  Create a new dataset that is equal to the original dataset but with the missing data filled in.
 
 ```r
@@ -118,6 +105,7 @@ mediansteps <-median(sumdata$TotalSteps,na.rm=TRUE)
 ```
 The mean total number of steps taken per day is **1.0766 &times; 10<sup>4</sup>**  
 The median total number of steps taken per day is **1.0766 &times; 10<sup>4</sup>**
+  
 ## Are there differences in activity patterns between weekdays and weekends?
 
 
@@ -135,4 +123,5 @@ xyplot(AvgSteps ~interval | date, typ="l" , ylab="Number of Steps", data = avgda
 ```
 
 ![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8.png) 
+  
 There is more activity (especially between the 750 and 1000 intervals) on weekdays as that peeked at above 200 steps.  Compared this to the weekend activity pattern where none of the intervals go beyond 200 steps.
